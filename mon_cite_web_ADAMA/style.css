@@ -1,0 +1,278 @@
+/* Réinitialiser les marges et paddings par défaut pour un meilleur contrôle */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Style du corps de la page */
+body {
+    background-color: rgb(233, 227, 241);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Conteneur du header pour aligner logo et nav */
+.logo-nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.logo-container img {
+    width: 80px;
+    height: auto;
+}
+
+/* Style de la navigation */
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 15px;
+}
+
+/* Effet hover pour les liens */
+.nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+}
+
+/* Ajustement du texte héros */
+.hero-text {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.hero-text h1 {
+    font-size: 48px;
+    color: white;
+}
+
+.hero-text p {
+    font-size: 20px;
+    color: white;
+    margin-top: 10px;
+}
+
+/* Image section héros */
+.heros-section img {
+    width: 50%;
+    height: auto;
+    max-height: 600px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Conteneur sombre */
+.dark-container {
+    background-color: #1b1b1b;
+    padding: 20px;
+}
+
+/* Grille pour les personnages */
+.characters-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+
+.character-card {
+    width: 180px;
+    text-align: center;
+    margin: 10px;
+}
+
+.character-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.character-card p {
+    color: white;
+    margin-top: 10px;
+}
+
+/* Conteneur du formulaire pour le centrer */
+.container-form {
+    display: flex;
+    justify-content: center; /* Centrage horizontal */
+    align-items: center; /* Centrage vertical */
+    height: 100vh; /* La hauteur du conteneur prend toute la hauteur de la fenêtre */
+    background-color: rgb(233, 227, 241); /* Même couleur de fond que le body */
+}
+
+/* Style du formulaire */
+.form-wrapper {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Ombre pour l'effet de profondeur */
+    width: 100%;
+    max-width: 400px; /* Taille maximale du formulaire */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Styles pour chaque champ du formulaire */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745; /* Couleur du bouton */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+
+
+/* Footer */
+.footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: rgb(36, 81, 230);
+    padding: 25px;
+    color: white;
+    border-radius: 10px;
+}
+
+.footer .colonnes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.footer .colonne p {
+    margin: 0 0 10px;
+}
+
+/* Media Queries pour la responsivité */
+
+/* Pour les téléphones en mode portrait et les petits écrans */
+@media (max-width: 768px) {
+    .logo-nav-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero-text h1 {
+        font-size: 32px;
+    }
+
+    .hero-text p {
+        font-size: 16px;
+    }
+
+    .heros-section img {
+        width: 100%;
+        height: auto;
+        max-height: none;
+    }
+
+    /* Footer */
+    .footer .colonnes {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer .colonne {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Formulaire adapté aux petits écrans */
+    .form-wrapper {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+/* Pour les tablettes (entre 768px et 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .logo-nav-container {
+        padding: 10px;
+    }
+
+    .hero-text h1 {
+        font-size: 40px;
+    }
+
+    .hero-text p {
+        font-size: 18px;
+    }
+
+    /* Image de la section héros */
+    .heros-section img {
+        max-width: 100%;
+    }
+
+    /* Footer */
+    .footer .colonnes {
+        flex-direction: row;
+    }
+}
+
+/* Pour les très grands écrans (plus de 1200px) */
+@media (min-width: 1200px) {
+    .logo-nav-container {
+        max-width: 1440px;
+    }
+
+    .heros-section {
+        max-width: 1440px;
+    }
+
+    .footer {
+        max-width: 1440px;
+    }
+}

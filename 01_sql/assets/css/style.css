@@ -1,0 +1,40 @@
+body{
+    background-color: #333;
+}
+
+header nav img {
+    width: 50px;
+}
+
+.container {
+    background-color: #fff;
+}
+
+hr {
+    height: 7px;
+    background: linear-gradient(to right, #ce0380 0%, #a409cd 50%, #af000f );
+    width: 80%;
+    margin: 0 auto;
+}
+
+strong {
+    color: #ce0380;
+}
+
+em {
+    color: darkslategrey;
+}
+
+h4 {
+    color: #a409cb;
+}
+
+h6 {
+    color: cornflowerblue;
+    margin-bottom: 20px !important;
+    font-size: 1.1rem;
+}
+
+img:not(img[src="assets/img/logo.png"]) {
+    box-shadow: 0px 0px 13px 16px rgba(0, 0, 0, 0.1);
+}

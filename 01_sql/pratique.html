@@ -1,0 +1,885 @@
+
+<!doctype html>
+<html lang="fr">
+
+<head>
+
+     <!-- Required meta tags -->
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+     <!-- Bootstrap CSS v5.2.1 -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+     <!-- Google font -->
+     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
+     <!-- feuille de style -->
+     <link rel="stylesheet" href="assets/css/style.css">
+     <title>Cours SQL</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light  border-bottom border-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img src="assets/img/logo.png" alt="logo"></a>
+                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                        <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html" >Acronyme</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="cours.html">cours</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="clause_sql.html">Les clauses SQL</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="pratique_sql.html">Pratique SQL</a>
+                            </li>
+                        </ul>
+                </div>
+        </div>
+        </nav>
+
+    </header>
+    <div class="container">
+        <!-- Début de main -->
+        <main>
+            <div class="row p-2">
+                <div class="col-sm-12 ">
+                    <hr>
+                    <h2 class="text-center" id="insert">Exercices</h2>
+                    <hr>
+                </div>
+                <div class="col-sm-12 py-5 mt-5 border border-dark">
+                    <h3 class="text-center mb-5">BDD employes</h3>
+                    <ul>
+
+                        <li>Afficher le nom , le prénom et le service des employés qui ont une lettre t à la fin du prénom et travailent dans le service  commercial et comptabilité : <br>
+                            <strong>
+                                <code>
+                                    SELECT nom, prenom, service FROM employes WHERE ( service = 'comptabilité' OR service = 'direction')AND prenom LIKE '%e'
+                                </code>
+                                <br>
+                                ou
+                                <br>
+                                <code>
+                                    SELECT nom, prenom, service FROM EMPLOYES WHERE prenom LIKE '%e' AND service IN ('comptabilité', 'direction')
+                                </code>
+                            </strong>
+
+                        </li>
+                        <li>
+                            le nom , le prénom et la date d'embauche des employés qui ont été embaucher après 2022 et ont le sexe = 'f ' : <br>
+                            <strong>
+                                <code>
+                                    SELECT nom, prenom, date_embauche FROM employes WHERE sexe = "f" AND date_embauche >= "2023-01-01"
+                                </code>
+                                <br>
+                                ou
+                                <br>
+                                <code>
+                                    SELECT nom, prenom, date_embauche FROM employes WHERE sexe = "f" AND date_embauche BETWEEN "2023-01-01" AND CURDATE()
+                                </code>
+                            </strong>
+
+                        </li>
+                        <li>
+                            Afficher les différents salaire touchées dans la base entreprise :  <br>
+                            <strong>
+                                <code>
+                                    SELECT DISTINCT salaire FROM employes ORDER BY salaire;
+                                </code>
+                                ou
+                                <br>
+                                <code>
+                                    SELECT DISTINCT salaire FROM employes GROUP BY salaire;
+                                </code>
+                            </strong>
+
+                        </li>
+                        <li>
+                            Afficher les noms des employés qui ont un salaire entre 2300 et 4000 :  <br>
+                            <strong>
+                                <code>
+                                    SELECT nom, prenom, FROM employes WHERE salaire >= 2300 AND salaire &lt,= 4000;
+                                </code>
+                                ou
+                                <br>
+                                <code>
+                                    SELECT nom, pronom, salaire FROM employes WHERE salaire BETWEEN 2300 AND 4000;
+                                </code>
+                            </strong>
+
+                        </li>
+                        <li>
+                            Afficher le nombre d'employés par salaire : <br>
+                            <strong>
+                                <code>
+                                    SELECT salaire, COUNT(*) AS nbrEmploye FROM employes GROUP BY salaire ORDER BY salaire;
+                                </code>
+                            </strong>
+
+                        </li>
+                        <li>Afficher la profession de l'employé 981 : <br>
+                            <strong>
+                                <code>
+                                    SELECT id_employe, prenom, service FROM employes WHERE id_employe = 981;
+                                </code>
+                            </strong>
+
+                        </li>
+                        <li>Afficher la date d'embauche de Paul : <br>
+                            <strong>
+                                <code>
+                                    SELECT prenom, date_embauche FROM employes WHERE penom = 'Paul';
+                                </code>
+                            </strong>
+
+                        </li>
+                        <li>Afficher le nombre de commerciaux : <br>
+                            <strong>
+                                <code>
+                                    SELECT CUMT(*) AS nbr_commerciaux FROM employes WHERE service = 'commercial';
+                                </code>
+                            </strong>
+                        </li>
+                        <li>Afficher le coût des commerciaux sur une année : <br>
+                            <strong>
+                                <code>
+                                    SELECT SUM(salaire*12) AS salaire_annuel FROM employes service = 'commercial';
+                                </code>
+                            </strong>
+                        </li>
+                        <li>Afficher le salaire moyen par service : <br>
+                            <strong>
+                                <code>
+                                    SELECT SERVICE, AVG(salaire) AS salaire_moyen FROM employes GROUP BY service;
+                                </code>
+                            </strong>
+                        </li>
+                        <li>Afficher le nombre de recrutement sur l'année 2022 : <br>
+                            <strong>
+                                <code>
+                                    SELECT COUNT(*) AS nbr_recrutement FROM employes WHERE date_embauche BETWEEN '2022-01-01' AND '2022-12-31'
+                                </code>
+                                ou
+                                <br>
+                                <code>
+                                    SELECT COUNT(*) AS nbr_recrutement FROM employes WHERE date_embauche LIKE '2022';
+                                </code>
+                            </strong>
+
+                        </li>
+                        <li>Augmenter le salaire pour chaque employé de 100€ : <br>
+                            <strong>
+                                <code>
+                                    UPDATE employes SET salaire = salaire + 100
+                                </code>
+                            </strong>
+                        </li>
+                        <li>Afficher le nombre de service : <br>
+                            <strong>
+                                <code>
+                                    SELECT COUNT(DISTINCT service) AS nbr_service FROM employes;
+                                </code>
+                            </strong>
+
+                        </li>
+                        <li>
+                            Afficher 10 employés à partir de l'enregistrement 10 : <br>
+                            <strong>
+                                <code>
+                                    SELECT * FROM employes LIMIT 10,10;
+                                </code>
+                            </strong>
+                        </li>
+                        <li>
+                            Afficher les salaires qui sont touchées par plus qu'un employé : <br>
+                            <strong>
+                                <code>
+                                    SELECT salaire,COUNT(*) FROM employes GROUP BY salaire HAVING COUNT(*) > 1
+                                </code>
+                            </strong>
+                        </li>
+                        <li>Afficher les informations de l'employé du service commercial gagnant le salaire le plus élevé : <br>
+
+
+                        </li>
+                        <li>Afficher l'employé ayant été embauché en dernier : <br>
+
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-sm-12 py-5 mt-5 border border-dark">
+                  <h3 class="text-center mb-5">BDD haribos</h3>
+                  <ul>
+                    <li>lister toutes les BDD de PHPMyAdmin <br>
+
+                    </li>
+                    <li>
+                        Créer une base de données SQL nommée HARIBO <br>
+
+                    </li>
+                    <li>
+                        <div class="row">
+                            <p class="col-sm-12"> Créer les tables stagiaires, bonbons et mange_bonbon </p>
+                            <div class="col-sm-4">
+                                    <code> -> CREATE TABLE stagiaires(
+                                        <br>
+                                        id_stagiaire INT NOT NULL PRIMARY KEY AUTO_INCREMENT, <br> prenom VARCHAR(100) NOT NULL, <br> yeux VARCHAR(30) NOT NULL, <br> genre enum('m', 'f') NOT NULL <br> ); 
+                                    </code>
+                            </div>   
+                            <div class="col-sm-4">
+                                    <code>
+                                    -> create table bonbons(<br>
+                                            id_bonbon INT NOT NULL PRIMARY KEY AUTO_INCREMENT, <br>
+                                            nom VARCHAR(100) NOT NULL, <br> saveur VARCHAR(100) NOT NULL <br> );
+                                    </code>
+                            </div>
+                            <div class="col-sm-4">
+                                    <code>
+                                        -> CREATE TABLE mange_bonbon( <br> id_mange_bonbon INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL, <br>
+                                                id_bonbon INT(11) DEFAULT NULL,  <br>
+                                                id_stagiaire INT(11) DEFAULT NULL,  <br>
+                                                date_manger DATE NOT NULL, <br>
+                                                quantite INT(11) NOT NULL <br> );
+                                    </code>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <strong>
+                                <code>
+                                    <ul>
+                                        <li>
+                                            Dans la table mange_bonbon, id_bonbon sera un champ clés etrangère en référence au champ id_livre de la table bonbon <br>
+                                            <strong>
+                                                <code> 
+                                                    -> ALTER TABLE mange_bonbon ADD FOREIGN KEY (id_bonbon) REFERENCES hatobos.bonbons(id_bonbon);
+                                                </code>
+                                            </strong>
+                                        </li>
+                                        <li>
+                                            Dans la table emprunt, id_livre sera un champ clés etrangère en référence au champ id_livre de la table livres <br>
+                                            <strong>
+                                                <code> 
+                                                    -> ALTER TABLE mangge_bonbon ADD FOREIGN KEY (id_stagiaire) REFERENCES haribos.stagiaires (id_stagiaire);
+                                                </code>
+                                            </strong>
+                                        </li>
+                                    </ul>
+                                </code>
+                            </strong>
+                    </div>
+                    </li>
+                    <li>
+                        <div class="row">
+                            <p>Insérer dans ces tables les informations suivantes:</p> 
+                            <div class="col-sm-4">
+                                <code>-> INSERT INTO stagiaires (prenom, yeux, genre) VALUES
+                                    ('jhordan', 'marron','m'), <br>
+                                    ('MohamedA', 'marron','m'), <br>
+                                    ('Anas', 'marron','m'), <br>
+                                    ('MohamedB', 'marron','m'), <br>
+                                    ('Mehdi', 'marron','m'), <br>
+                                    ('Mathieu', 'marron','m'), <br>
+                                    ('Hakim', 'marron','m'), <br>
+                                    ('Sonia', 'marron','f'), <br>
+                                    ('Julie', 'marron','f'), <br>
+                                    ('Assa', 'marron','f'), <br>
+                                    ('Magalie', 'marron','f'), <br>
+                                    ('Yvette', 'marron','f'); <br>
+        
+                                </code>
+                            </div> 
+                            <div class="col-sm-4">
+                                <code>                                      
+                                        -> INSERT INTO bonbons (nom, saveur) VALUES
+                                    ('dragibus', 'cola'), <br>
+                                    ('tagada', 'fraise'), <br>
+                                    ('bams', 'banane'), <br>
+                                    ('rotella', 'reglisse'), <br>
+                                    ('floppys', 'sucre'), <br>
+                                    ('rainbollows', 'marshmallow'), <br>
+                                    ('bigharri', 'cerise'), <br>
+                                    ('oursor', 'fruits'), <br>
+                                    ('croco', 'fruits'), <br>
+                                    ('oeufoplat', 'guimauve'), <br>
+                                    ('flanbotti', 'caramel'); <br>
+                                </code>
+                            </div>
+                            <div class="col-sm-4">
+                                <code> 
+                                    -> INSERT INTO mange_bonbon (id_bonbon, id_stagiaire, date_manger, quantite) VALUES(4,7,'2018-12-20', 5), <br>
+                                    (1,1,'2018-12-05', 5), <br>
+                                    (2,2,'2018-12-03', 5), <br>
+                                    (3,3,'2018-12-04', 5), <br>
+                                    (5,4,'2018-12-15', 5), <br>
+                                    (6,5,'2018-12-18', 5), <br>
+                                    (7,6,'2018-12-22', 5), <br>
+                                    (8,8,'2018-12-25', 5), <br>
+                                    (9,9,'2018-12-24', 5), <br>
+                                    (10,10,'2018-12-01', 5), <br>
+                                    (11,11,'2018-12-06', 5); <br>
+                                </code>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        Lister les tables de la BDD *haribo* <br>
+                        <strong>
+                            <code>
+                                -> SHOW TABLES FROM haribo
+                            </code>
+                        </strong>
+                    </li>
+                    <li>
+                        voir les paramètres de la table *bonbon* <br>
+                        <strong>
+                            <code>
+                                -> DESC bonbons <br>
+                                <code>
+                                -> DESCRIDE bonbons
+                                </code> <br>
+                                <code>
+                                ->  SHOW
+                                </code>
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Sélectionner tous les champs de tous les enregistrements de la table *stagiaire* <br>
+                        <strong>
+                            <code>
+                                -> SELECT FRON INSERT 'stagiaire'
+                            </code>
+                        </strong>
+
+                     </li>
+                     <li>
+                        Rajouter un nouveau stagiaire *Patriiiick* en forçant la numérotation de l'id <br>
+                        <!--100 , vert , m-->
+                        <strong>
+                            <code>
+                               -> INSERT INTO stagiaires (id_stagiaire, prenom,genre,yeux ) VALUES ( 100,'Patriiiick','m','vert');
+                            </code>
+                            <br>
+                            ou 
+                            <br>
+                            <code>
+                               -> INSERT INTO stagiaires SET id_stagiaire = 100 , prenom = 'Patriiiick', yeux = 'vert', genre = 'm'
+                            </code>
+                        </strong>
+
+                     </li>
+                     <li>
+                        Rajouter un nouveau stagiaire *Mila* SANS forcer la numérotation de l'id <br>
+                         <!--bleu, f -->
+                        <strong>
+                            <code>
+                                INSERT INTO stagiaires ( prenom,genre,yeux ) VALUES ( 'Mila','f','bleu');
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Changer le prénom du stagiaire qui a l'id 100 de *Patriiiick* à *Patrick* <br>
+                        <strong>
+                            <code>
+                                UPDATE stagiaires SET prenom = 'Patrick' WHERE prenom = 'Patriiiick';
+                            </code>
+                        </strong>
+                    </li>
+                     <li>
+                        Rajouter dans la table manger que Patrick a mangé 5 Tagada purple le 15 septembre <br>
+                        <p>Il faut tout d'd'abord isérer le bonbon tagada avec la saveur purle</p>
+                        <strong>
+                            <code>
+                                INSERT INTO bonbons (nom, saveur) VALUES ('tagada', 'purple')
+                            </code>
+                        </strong>
+                        <p>
+                            J'insére dans la table mange_bonbon que Patrick a mangé 5 Tagada purple le 15 septembre
+                        </p>
+                        <strong>
+                            <code>
+                                INSERT INTO mange_bonbon (id_stagiaire, id_bonbon, date_manger, quantite) VALUES (100, 2, '2018-09-15',5);
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Sélectionner tous les noms des bonbons <br>
+                        <strong>
+                            <code>
+                                SELECT nom FROM bonbons;
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Sélectionner tous les noms des bonbons en enlevant les doublons <br>
+                       <strong>
+                        <code>
+                            SELECT DISTINCT (nom) FROM bonbons;
+                        </code>
+                       </strong>
+                    </li>
+                     <li>
+                        Récupérer les couleurs des yeux des stagiaires (Sélectionner plusieurs champs dans une table) <br>
+                        <strong>
+                            <code>
+                                SELECTprenom, yeux FROM stagiaires
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Dédoublonner un résultat sur plusieurs champs <br>
+                        <strong>
+                            <code>
+                                SELECT DISTINCT yeux FROM stagiaire;
+                            </code>
+                        </strong>
+                        <strong>
+                            <code>
+                                SELECT DISTINCT yeux FROM stagiaire GROUP BY yeu;
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Sélectionner le stagiaire qui a l'id 5 <br>
+                        <strong>
+                            <code>
+                                SELECT * FROM stagiaires WHERE id_stagiaire = 5
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Sélectionner tous les stagiaires qui ont les yeux marrons <br>
+                        <strong>
+                            <code>
+                                SELECT * FROM stagiaires WHERE yeux = 'marron';
+                            </code>
+                        </strong>
+                     </li>
+
+                     <li>
+                        Sélectionner tous les stagiaires dont l'id est plus grand que 9 <br>
+                        <strong>
+                            <code>
+                                SELECT * FROM `stagiaires` WHERE id_stagiaire > 9;
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Sélectionner tous les stagiaires SAUF celui dont l'id est 3 <br>
+                        <strong>
+                            <code>
+                                SELECT * FROM `stagiaires` WHERE id_stagiaire != 3;
+                            </code>
+                        </strong>
+                        <br>
+                        ou 
+                        <br>
+                        <strong>
+                            <code>
+                                SELECT * FROM `stagiaires` WHERE id_stagiaire > 3 OR id_stagiaire &lt;3;
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Sélectionner tous les stagiaires qui ont un id inférieur ou égal à 10 <br>
+                        <strong>
+                            <code>
+                                SELECT * FROM `stagiaires` WHERE id_stagiaire &lt; = 10;
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Sélectionner tous les stagiaires dont l'id est compris entre 7 et 11 <br>
+                        <strong>
+                            <code>
+                               -> SELECT * FROM `stagiaires` WHERE id_stagiaire BETWEEN 7 AND 11
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Sélectionner les stagiaires dont le prénom commence par un *S* <br>
+                        <strong>
+                            <code>
+                                SELECT * FROM stagiaires WHERE prenom LIKE 's%'
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Trier les stagiaires femmes par id_stagiaire décroissant <br>
+                        <strong>
+                            <code>
+                                SELECT * FROM `stagiaires` WHERE genre = 'f' ORDER BY id_stagiaire DESC;
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Trier les stagiaires hommes par prénom dans l'ordre alphabétique <br>
+                        <strong>
+                            <code>
+                                SELECT * FROM `stagiaires` WHERE genre = 'm' ORDER BY prenom DESC;
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Trier les stagiaires en affichant les femmes en premier et en classant les couleurs des yeux dans l'ordre alphabétique <br>
+                        <!-- l'ordre des membres de l'enumeration depend de l'ordre dans lequel on les a insérer dans les champs -->
+                        <strong>
+                            <code>
+                                SELECT prenom, genre, yeux FROM stagiaires WHARE ORDER BY genre ASC, yeux ASC
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Limiter l'affichage d'une requête de sélection de tous les stagiaires aux 3 premires résultats <br>
+                        <strong>
+                            <code>
+                                SELECT * FROM `stagiaires` ORDER BY genre DESC, yeux ASC;
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Limiter l'affichage d'une requête de sélection de tous les stagiaires à partir du 3ème résultat et des 5 suivants <br>
+                        <strong>
+                            <code>
+                                SELECT prenom, genre, FROM stagiaires LIMIT 2,6
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Afficher les 4 premiers stagiaires qui ont les yeux marron <br>
+                        <strong>
+                            <code>
+                                SELECT * FROM stagiaire WHERE yeux 'marron' LIMIT 4;
+                            </code>
+                        </strong>
+
+                     </li>
+                     <li> Pareil mais en triant les prénoms dans l'ordre alphabétique <br>
+                        <strong>
+                            <code>
+                                SELECT * FROM stagiaires WHERE yeux = 'marron' ORDER BY prenom LIMIT 4
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Compter le nombre de stagiaires <br>
+                        <strong>
+                            <code>
+                                SELECT count(*) AS nbr_stagiaire FROM stagiaire
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Compter le nombre de stagiaires hommes mais en changeant le nom de la colonne de résultat par *nb_stagiaires_H* <br>
+                        <strong>
+                            <code>
+                                SELECT count(*) AS nbr_stagiaire_h FROM stagiaire WHERE genre = 'm'
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Compter le nombre de couleurs des yeux différentes <br>
+                        <strong>
+                            <code>
+                                SELECT yeux, COUNT(*) FROM stagiaires GROUP BY yeux 
+                            </code>
+                        </strong>
+                    </li>
+
+                     <li>
+                        Afficher le prénom et les yeux du stagiaire qui a l'id_stagiaire le plus petit <br>
+                        <strong>
+                            <code>
+                                SELECT prenom,yeux FROM stagiaires WHERE ORDER BY id_stagiaire LIMIT 1;
+                            </code>
+                        </strong>
+                        <br>
+                        ou 
+                        <br>
+                        <strong>
+                            <code>
+                                SELECT prenom, yeux, MIN(id_stagiaire) FroM stagiaires;
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Afficher les stagiaires qui ont les yeux bleu et vert <br>
+                        <strong>
+                            <code>
+                                SELECT prenom, yeux FROM stagiaires WHERE yeux IN ('bleu', 'vert')
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        A l'inverse maintenant, afficher les stagiaires qui n'ont pas les yeux bleu ni vert <br>
+                        <strong>
+                            <code>
+                              ->  SELECT prenom, yeux FROM stagiaires WHERE yeux NOT IN ('bleu', 'vert')
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Afficher combien de bonbons ont été consommés au total <br>
+                        <strong>
+                            <code>
+                              ->  SELECT SUM(quantite) AS total8bonbon_manger FROM mange_bonbon;
+                            </code>
+                        </strong>
+                     </li>
+                     <li>
+                        Afficher les saveurs des bonbons (sans doublons) <br>
+                        <strong>
+                            <code>
+                                SELECT DISTINCT saveur FROM bonbons;
+                            </code>
+                        </strong>
+                     </li>
+                     <li> Afficher le prénom et les yeux du stagiaire qui a l'id le plus grand /!\ c'est une requête imbriquée qu'il faut faire (requête sur le résultat d'une autre requête) : <br>
+                        <strong>
+                            <code>
+                                SELECT prenom, yeux FROM stagiaires WHERE id_stagiaire IN(SELECT MAX(id_stagiaire) FROM stagiaires);
+                            </code>
+                        </strong>
+                    </li>
+                    <li>récupérer tous les stagiaires qui ont mangé des bonbons <br>
+                        <strong>
+                            <code>
+                                SELECT prenom FROM stagiaires WHERE id_stagiaire IN (SELECT id_stagiaire FROM mange_bonbon )
+                            </code>
+                        </strong>
+                    </li>
+                    <li>
+                        Récupérez les informations sur les stagiaires qui ont mangé plus d'un seul bonbon <br>
+                        <strong>
+                            <code>
+                                SELECT prenom FROM stagiaires WHERE id_stagiaire IN (SELECT id_stagiaire FROM mange_bonbon WHERE quantite > 1 )
+                            </code>
+                        </strong>
+                    </li>
+                    <li>
+                        Afficher le prénom du stagiaire, le nom du bonbon, la date de consommation pour tous les stagiaires qui ont mangé au moins une fois <br>
+                        <strong>
+                            <code>
+                                SELECT prenom.stagiaire, nom.bonbon, mange.bonbon.date.manger,
+                            </code>
+                        </strong>
+                    </li>
+                    <li>
+                        Afficher le nombre de consommation de *Tagada* <br>
+                        <strong>
+                            <code>
+                                SELECT COUNT(quantite) AS nbr_consomation FROM mange_bonbon WHERE id_bonbon IN (SELECT id_bonbon FROM bonbons WHERE nom = 'tagada')
+                            </code>
+                        </strong>
+                    </li>
+                    <li>
+                        Afficher cette fois le total de "tagada" consommées <br>
+                        <strong>
+                            <code>
+                                
+                            </code>
+                        </strong>
+                    </li>
+
+                    <li>
+                        Afficher le prénom du stagiaire qui a mangé le plus de bonbons <br>
+                        <strong>
+                            <code>
+
+                            </code>
+                        </strong>
+                    </li>
+
+
+                  </ul>
+                </div>
+                <div class="col-sm-12 py-5 mt-5 border border-dark">
+                    <h3 class="text-center mb-5">BDD immobilier</h3>
+                    <ul>
+                        <li>Création de la BDD "immobilier" : <br>
+
+                        </li>
+                        <li>
+                            <div class="row">
+                                 <p class="col-sm-12"> Créer les tables : agence, demande, logement, logement_agence, logement_personne et personne  </p>
+                                <div class="col-sm-4">
+
+                                </div>
+                                <div class="col-sm-4">
+
+                                </div>
+                                <div class="col-sm-4">
+
+                                </div>
+                                <div class="col-sm-4">
+
+                                    </code>
+                                </div>
+                                <div class="col-sm-4">
+
+                                </div>
+                                <div class="col-sm-4">
+
+                                </div>
+                            </div>
+                        </li>
+                        <li class="mt-5">
+                            <div class="row">
+                                <p class="col-sm-12"> Création des clefs étrangères </p>
+                                <div class="col-sm-4">
+
+                                </div>
+                                <div class="col-sm-4">
+
+                                </div>
+                                <div class="col-sm-4">
+
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            Affichez les noms des agences : <br>
+
+
+                        </li>
+                        <li>
+                            Affichez le premier enregistrement de la table logement : <br>
+
+                        </li>
+                        <li>
+                            Affichez le nombre de logements (Alias : Nombre_de_logements) :<br>
+
+                        </li>
+                        <li>
+                            Affichez les logements à vendre à moins de 150 000 € dans l'ordre croissant des prix :<br>
+
+                        </li>
+                        <li>
+                            Afficher le nombre de logements à la location (alias : 'nombre') :<br>
+
+                        </li>
+                        <li>
+                            Afficher les villes différentes recherchées par les personnes demandeusent d'un logement :<br>
+
+                        </li>
+                        <li>
+                            Affichez le nombre de biens à vendre par ville :
+
+
+                        </li>
+                        <li>
+                            Quels sont les id des logements destinés à la location ? :<br>
+
+                        </li>
+                        <li>
+                            Quels sont les id des logements entre 20 et 30m² ? :<br>
+
+                        </li>
+                        <li>
+                            Quel est le prix vendeur du logement le moins cher a vendre ? :<br>
+
+                        </li>
+                        <li>
+                            Dans quelle ville se trouve les maisons à vendre ? :<br>
+
+                        </li>
+                        <li>
+                            L'agence Orpi souhaite diminuer les frais qu'elle applique sur le logement ayant l'id « 5246». Passer les frais de ce logement de 800 à 730€
+                        </li>
+                        <li>
+                            Quels sont les logements gérés par l'agence « laforet » :
+
+                        </li>
+                        <li>
+                            Affichez le nombre de propriétaires dans la ville de Paris (Alias : Nombre propriétaire parisien) :<br>
+
+                        </li>
+                        <li>
+                            Afficher les infos des trois premières personnes souhaitant acheter un logement :<br>
+
+                        </li>
+                        <li>
+                            Affichez les noms des agences qui vendent le logement ayant la référence « 5770 » :<br>
+
+                        </li>
+                        <li>
+                            Affichez les prénoms des personnes souhaitant accéder à un logement sur la ville de Lyon :<br>
+
+                        </li>
+                        <li>
+                            Affichez les prénoms des personnes souhaitant accéder à un logement en location sur la ville de Paris :<br>
+
+                        </li>
+                        <li>
+                            Affichez les prénoms des personnes souhaitant acheter un logement de la plus grande à la plus petite superficie :<br>
+
+                        </li>
+                        <li>
+                            Quel sont les prix finaux proposés par les agences pour la maison à la vente ayant la référence « 5091 » ? (Alias : prix frais d'agence inclus) :<br>
+
+
+                        </li>
+                        <li>
+                            Indiquez le prix total (prix et frais d'agence) pour le logement ayant la référence « 5873 »<br>
+
+                        </li>
+                        <li>
+                            Si l'ensemble des logements étaient vendus ou loués demain, quel serait le bénéfice généré grâce aux frais d'agence et pour chaque agence (Alias : benefice, classement : par ordre croissant des gains) :
+
+                        </li>
+                        <li>
+                            Affichez les id des biens en location, les prix, suivis des frais d'agence (classement : dans l'ordre croissant des prix) :<br>
+
+
+                        </li>
+                        <li>
+                            Quel est le nom de l'agence proposant le logement le moins cher à louer ? :<br>
+
+                        </li>
+                        <li>
+                            Affichez le prénom et la ville où se trouve le logement de chaque propriétaire :<br>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+    </div> <!-- fin du container fluid -->
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
+HTML
+Informations
+Cet extrait a été créé le 31 mai 2024 à 16:03:41
+
+Cet extrait expire le 30 juin 2024 à 16:03:41
+
+Langage : html
+
+Logo html
+
+Link
+Voici votre URL de partage : https://sharemycode.io/c/3046c90
+Ce code a été partagé avec Share on ShareMyCode.io pour VSCode
+
+Service par Nouvelle-Techno.fr - Mentions légales - Vie privée

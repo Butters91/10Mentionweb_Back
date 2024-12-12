@@ -1,0 +1,4 @@
+ AuthName "Page admin"
+                AuthType Basic
+                AuthUserFile C:\laragon\www\10Mentionweb_Back\02_php\mon_cite_web_ADAMA\admin\.htpasswd
+                Require valid-user

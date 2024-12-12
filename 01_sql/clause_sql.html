@@ -1,0 +1,1064 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="paul pierrard">
+    <!-- bootsrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+    <!-- feuille de style perso -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>clause_sql</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light  border-bottom border-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img src="assets/img/logo.png" alt="logo"></a>
+                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Acronyme</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cours.html">cours</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="clause_sql.html">Les clauses SQL</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pratique_sql.html">Pratique SQL</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main>
+            <div class="row border border-dark p-5">
+                <div class="col-sm-12">
+                    <h2 class="text-center">1-Les requêtes de base</h2>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-sm-12 d-flex justify-content-center mt-5 ">
+                <ul>
+                    <li>Créer une base de donnée : <strong><code>CREATE DATABASE IF NOT EXISTS nomBdd </code> </strong></li>
+                    <li>Supprimer une BDD : <strong><code>DROP DATABASE IF EXISTS nonBdd</code></strong></li>
+                    <li>Observer la description d'une table : <strong><code>DESC nomTble</code></strong></li>
+                    <li>Voire les BDD dans le serveur : <strong><code>SHOW DATABASES</code></strong></li>
+                    <li>
+                        Rjouter un champ dans une table existante : <strong> <code>
+                        ALTER TABLE nom_de_table ADD nom_nouvelle_colonne VARCHAR(255) AFTER nom_colonne_existante
+                        </code></strong>
+                    </li>
+                </ul>
+            </div>
+        
+        </div>
+    <div class="container">
+        
+            <div class="row border border-dark p-5">
+                <div class="col-sm-12">
+                    <h2 class="text-center">2 - Tables et colonnes</h2>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-sm-12 d-flex justify-content-center mt-5 ">
+                <ul>
+                    <li>Créer une BDD 'entreprise' : <strong><code>CREATE DATABASE IF NOT EXISTS entreprise</code></strong></li>
+                    <li><pre>Créer une table 'employes' dans la BDD 'entreprise' : 
+                            <strong>
+                                <code>
+                                    CREATE TABLE IF NOT EXISTS employes(
+                                    id_employes INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+                                    prenom VARCHAR(20) NULL,
+                                    nom VARCHAR(50) NULL , 
+                                    sex ENUM ('F', 'm') NOT NULL, 
+                                    service VARCHAR(30) NULL , 
+                                    date_embauche DATE NULL, 
+                                    salaire FLOAT NULL 
+                                    )
+                                </code>
+                            </strong>
+                        </pre>
+                    </li>
+                    <li>
+                        Inserer des données dans une table : 
+                        <strong>
+                            <code>
+                                <pre>
+                                    INSERT INTO employes (id_employes, prenom, nom, sex, service, date_embauche, salaire)
+                                    VALUES (350, 'Marc', 'ISAC', 'm', 'direction', '2023-12-01', 5000),
+                                    (351, 'Paul', 'PIERRARD', 'm', 'directeur', '2002-11-13', 50000)
+
+                                </pre>
+                            </code>
+                        </strong>
+                    </li>
+                    <li>
+                        Syntaxe alternative : ne permet pas d'insérer plusieurs séries de valeurs en une sele requette, contrairement à la syntaxe de base (au dessus)
+                        <pre>
+                            <strong>
+                                <code>
+                                    INSERT INTO employes SET id_employes = 900 , prenom = 'Sahar' , 
+                                    nom = 'FERCHICHI', sex = 'f' ,service = 'direction', date_embauche= '2022-06-06' , salaire= 7000
+                                </code>
+                            </strong>
+                        </pre>
+                    </li>
+                    <li>
+                        Effacer une table : <strong><code>DROP TABLE nomTable</code></strong>
+                    </li>
+                </ul>
+            </div>
+            <div class="row border border-dark p-5">
+                <div class="col-sm-12">
+                    <h2 class="text-center">3 - SELECT & DISTINCT</h2>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-sm-12 d-flex justify-content-center mt-5 ">
+               <ul>
+                <li>Pour voire tous le contenue d'une table : <strong><code>SELECT * FROM employes</code></strong></li>
+                <li class="alert  alert-success ">selectioner les valeurs de deux champs d'une table : SELECT colonne1, colonne2 FROM nomTable
+                    <br><strong><code>
+                        -> SELECT prenom, nom FROM employes
+                    </code></strong> 
+                </li>
+                <li class="alert  alert-success">Afficher les donnees sans doublons : SELECT DISTINCT (clonne) FROM nomTable
+                    <strong>
+                        <code>
+                            -> SELECT DISTINCT service FROME employes
+                        </code>
+                    </strong>
+                </li>
+                <li>
+                    Effacer un enregistrement : DELETE FROM nomTable WHERE colonne = " "
+                    <strong><code>DELETE FROM employes WHERE nom = 'salimata' </code></strong>
+                </li>
+               </ul>
+            </div>
+            <div class="col-sm-12 col-md-6 mt-5">
+                <p class="alert alert-danger ">
+                    Les requetes ne sont pas sensible a la casse mais les conventions idique q'il faut des mot cléfs des requetes en MAJ. C'est plus facile ainci de s'y retrouver.
+                </p>
+            </div>
+            <div class="row border border-dark p-5">
+                <div class="col-sm-12">
+                    <h2 class="text-center">4-Les opérateurs de comparaison</h2>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-sm-12 mt-5 text-center ">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Operateur</th>
+                            <th scope="col">Symbole</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                            <th scope="row">=</th>
+                            <td>Est égal à</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">&gt;</th>
+                            <td>Strictement supèrieur à</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">&lt;</th>
+                            <td>Strictement infèrieur à</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">&gt;=</th>
+                            <td>Supèrieur ou égal à</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">&lt;=</th>
+                            <td>Infèrieur ou égal à</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">&lt; &gt; ou !=</th>
+                            <td>Est different de</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="exo">
+
+                    <span class="text-success">EXERCICES</span> <br><br>
+                    
+                        exo 1 : <br>
+                        <strong><code>SELECT * FROM employes WHERE service = "commercial"</code></strong> <br><br>
+    
+                        Exo 2 :<br> 
+    
+                        <strong><code>SELECT * FROM `employes` WHERE service != "direction"</code></strong><br><br>
+    
+                        Exo 3 : <br>
+    
+                        <strong><code>SELECT * FROM `employes` WHERE id_employe > 500</code></strong><br><br>
+    
+                        Exo 4 : <br>
+    
+                        <strong><code>SELECT * FROM `employes` WHERE salaire >= 3200</code></strong><br><br>
+                    
+
+                </p>
+            </div>
+            <div class="row border border-dark p-5">
+                <div class="col-sm-12">
+                    <h2 class="text-center">5 - Créee un ALIAS avec AS</h2>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-sm-12 mt-5 text-center ">
+
+                <P>
+                    Nous ceéons un ALIAS pour renomer temporairement une colone ou une table dans une requête
+                    Cette astuce est particulièrement utiliser pour faciliter la lecture des requettes 
+                </P>
+                <ul>
+                    <li>SELECT colone1,colone2,colone3 AS colone FROM nomTable</li>
+                    <li>
+                        <strong>
+                            <code>
+                                SELECT nom , prenom AS firstName FROM employes
+                            </code>
+                        </strong>
+                    </li>
+                    <li>
+                        <strong>
+                            <code>
+                                SELECT nom , prenom , salaire*12 AS salireAnuelle FROM employes
+                            </code>
+                        </strong>
+                    </li>
+                </ul>
+                
+            </div>
+            <div class="row border border-dark p-5">
+                <div class="col-sm-12">
+                    <h2 class="text-center">6 - Les conditions et les conditions multiples</h2>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-sm-12 mt-5 text-center ">
+                <h6 class="text-center">Le mot cléf <em>WHERE</em> (à condition que) </h6>
+                <ul>
+                    <li class="alert alert-success">Nous cherchons une condition une partie des donées:
+                        <code>SELECT colone,colone FROM table WHERE colone = 'donnée'</code>
+                    </li>
+                    <li>Ici nous cherchons à afficher les personnes dont le sex est masculin</li>
+                    <li>Trouver èle personne qui gagne 700:
+                        <code>SELECT nom,prenom,salaire FROM `employes` WHERE salaire = 7000</code>
+                    </li>
+                </ul>
+                <div class="col-sm-12 mt-5 text-center ">
+                    <h6 class="text-center">Le mot cléf <em>WHERE</em> avec différentes valeurs et AND </h6>
+                    <ul>
+                        <li>
+                            Nous cherchons l'emplyeé qui gagne 5300 euros et dont le service est commerciale
+                            <strong>
+                                <code>
+                                    -> SELECT * FROM employes WHERE salaire = 5000 AND service = 'comptabilité'
+                                </code>
+                            </strong>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-12 mt-5 text-center ">
+                    <h6 class="text-center">Le mot cléf <em>WHERE</em> avec différentes valeurs et OR </h6>
+                    <ul>
+                        <li>
+                            Nous cherchons les employés qui gagnent un salaire qui est égale à 5000 euros ou moins de 200 euros
+                            <strong>
+                                <code>
+                                    -> SELEECT prenom, nom, salaire FROM employes WHERE salaire = 5000 OR salaire &lt;= 2000;
+                                </code>
+                            </strong>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-12 mt-5 text-center ">
+                    <h6 class="text-center">Le mot cléf <em>WHERE</em> et l'odre de prorité sur les conditions AND et OR</h6>
+                    <ul>
+                        <li>
+                           <li> Nous cherchons à afficher les employés qui travaillent dans le service production et qui gagnent 4000 euros ou 7000
+                            <STrong>
+                                <CODe>SELECT prenom, nom, service, salaire FROM employes WHERE salaire  = 4000 OR salaire = 7000 AND service = 'direction'</CODe>
+                            </STrong>
+
+                           </li>
+                           <li>
+                                Lorsqu'il ya AND et OR au sein de la meme requette, le système lit la condition de la requete de la droite vers la gauche. Ainsi, il verra d'abord <strong> <code> salaire = 4000 OR salaire = 7000 </code></strong>puis le service demandé
+                           </li>
+                           <li>
+                                Pour garantire l'ordre naturel de la lecture (de de la gauche vers la droite), nous utiliserons des parenthèses :
+                           </li>
+                           <li>
+                            <strong>
+                                <code>rong>
+                                    <CODe>SELECT prenom, nom, service, salaire FROM employes WHERE ( salaire = 4000 OR 7000) AND service = 'direction'</CODe></code>
+                            </strong>
+                           </li>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-12 mt-5 text-center ">
+                    <h6 class="text-center">Le mot cléf <em>WHERE</em> avec <em>BETWEEN</em> (entre)</h6>
+                    <ul>
+                       <li class="alert alert-success">Nous cherchons avec condition une partie des données <br>
+                        select * FROM monTable WHERE colonne BETWEEN donnée 
+                    </li>
+                    <li>
+                        Nous cherchon à le nombre de personnes embauchée entre 2021 et 2023
+                        <strong>
+                            <code>
+                                select non, prenom, date_embauche FROM employes WHERE date_embauche BETWEEN '2021-01-01' AND '2023-12-31'
+                            </code>
+                        </strong>
+                    </li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-12 mt-5 text-center ">
+                    <h6 class="text-center">Le mot cléf <em>WHERE</em> avec <em>LIKE</em> </h6>
+                    <ul>
+                       <li>
+                        Afficher les employés dont le prénom commence par la lettre "s":</p> <br>
+                        <strong>
+                            <code>
+                                SELECT * FROM employes WHERE prenom LIKE 's%'
+                            </code>
+                        </strong>
+                       </li>
+                        <li>
+                            Cette méthode sera très utlise dans un moteur de rechercher.
+                         </li>
+                         <li>
+                            Dans cette ligne de code, le pourcentage signifie que l'on recherche le "s" en debut de mot, ainsi, la suite de caractères viens après le "s"
+                         </li>
+                         <li>
+                            Afficher les employés dpnt le prénom qui contient la lettre "s"
+                            <strong>
+                                <code>
+                                    SELECT * FROM employes WHERE prenom LIKE '%s%'
+                                </code>
+                            </strong>
+                         </li>
+                         <li>
+                            Avec la présence du pourcentage avant et aprés le caractères rechecher, nous demandons au système de trouver de enregistrements contenant l'expression recherché
+                         </li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-12 mt-5 text-center ">
+                    <h6 class="text-center">Le mot cléf <em>WHERE</em> avec <em>CURDATE()</em> (date courante)</h6>
+                    <ul>
+                      <li class="alert alert-success">
+                            C'est une fonction prédéfinie avec ses paranthèse
+                      </li>
+                      <li>
+                        Une requéte qui donne ma date du serveur, la date du jours :
+                        <strong>
+                            <code>
+                                SELECT CURDATE()
+                            </code>
+                        </strong>
+                      </li>
+                      <li class="alert alert-danger">
+                        Dans une BDD, les dates sont toujours au format états-unis en YYYY-MM-DD
+
+                      </li>
+                      <li>
+                        Afficher les employés embauchés entre 2022 et aujord'hui : 
+                        <strong>
+                            <code>
+                                SELECT * FROM employes WHERE date_embauche BETWEEN '2022-01-01' AND CURDATE();
+                            </code>
+                        </strong>
+                      </li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-12 mt-5 text-center ">
+                    <h6 class="text-center">Le mot cléf <em>WHERE</em> avec <em>IM</em> </h6>
+                    <ul>
+                      <li>
+                           Egale (=) permet d'annoncer une seule valeure tandis que IN d'annoncer plusieurs valeurs
+                      </li>
+                      <li>
+                        Trouver les employés de la comptabilité et du service informatique :
+                        <strong>
+                            <code>
+                                SELECT * FROM `employes` WHERE service IN ('comptabilité' OR service = 'informatique');
+
+                            </code>
+                        </strong>
+                      </li>
+                     
+                    </ul>
+                </div>
+
+                <div class="col-sm-12 mt-5 text-center ">
+                    <h6 class="text-center">Le mot cléf <em>WHERE</em> avec <em> NOT IM</em> </h6>
+                    <ul>
+                      <li>
+                          Différent (!=) permet d'exclure une seule valeur, NOT IN permet d'exclure plusieur valeur
+                      </li>
+                      <li>
+                        Trouver les employés qui ne sont pas au service compatbilité et informatique :
+                        <strong>
+                            <code>
+                                SELECT * FROM `employes` WHERE service NOT IN ('comptabilité' service = 'informatique');
+
+                            </code>
+                        </strong>
+                      </li>
+                     
+                    </ul>
+                </div>
+
+            </div>
+            <div class="row border border-dark p-5">
+                <div class="col-sm-12">
+                    <h2 class="text-center">7 - Clasemment avec ORDER BY</h2>
+                    <hr>
+                </div>
+                <div class="col-sm-12 mt-5 text-center ">
+                    <ul>
+                        <li>
+                            Grace à <em>ORDER BY</em> on va classer le données ordre alphabétique
+                        </li>
+                        <li>
+                            On range les noms ordre alphabétique
+                            <strong>
+                                <code>
+                                    SELECT prenom, nom FROM employes ORDER BY nom DESC
+                                </code>
+                            </strong>
+                        </li>
+                        <li>
+                            Fonctionne pour les string comme pour les nombre : 
+                            <strong>
+                                <code>
+                                    SELECT prenom, nom, salaire FROM employes ORDER BY salaire DESC;
+                                </code>
+                            </strong>
+                        </li>
+                        <li>
+                            ORDER BY permet de trier sur plusieurs colonnes 'tri multiple' :
+                            <strong>
+                                <code>
+                                    SELECT nom, prenom, salaire, service FROM employes ORDER BY service ASC, salaire DESC;
+                                </code>
+                            </strong>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-12">
+                    <h2 class="text-center">8 - Limiter les résultats avec le mot clé <em>LIMIT</em></h2>
+                    <hr>
+                </div>
+                <div class="col-sm-12 mt-5 ">
+                    <ul>
+                       <li>
+                        Afficher les employés en les classant par salaire (du + grand au petit) et en limitant le résultat à 3 :
+                        <strong>
+                            <code>
+                                SELECT * FROM employes ORDER BY salaire DESC LIMIT 0, 3;
+                            </code>
+                        </strong>
+                       </li>
+                       <li class="alert alert-danger">
+                            Le premier chiffre précise l'enregistrement de départ : 0 qui définit le premier enregistrement informatique.
+                            Le seconde chiffre indique combien de résultat nous attendons
+                       </li>
+                    </ul>
+                </div>
+
+                <div class="row border border-dark p-5">
+                    <div class="col-sm-12">
+                        <h2 class="text-center">9 - Réaliser des calculs dans nos requetes</h2>
+                        <hr>
+                    </div>
+                    <div class="col-sm-12 mt-5">
+                        <h6 class="text-center">Calculer une somme avec <em>SUM()</em> et une moyenne avec <em>AVG()</em></h6>
+                        <ul>
+                           <li>Calculer la somme totale des salaires à l'année
+                            <strong>
+                                <code>
+                                    SELECT SUM(salaire*12) AS salaireSalaire FROM employes;
+                                </code>
+                               </strong>
+                           </li>
+                           <li>
+                                Calculer le salaire mensuel moyenne de tout les employés
+                            <strong>
+                                <code>
+                                    SELECT AVG(salaire) FROM employes;
+                                </code>
+                            </strong>
+                           </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-12 mt-5">
+                        <h6 class="text-center">Arrondir avec <em>ROUND()</em></h6>
+                        <ul>
+                          <li>
+                            Grace à <em>ROUND()</em> on peut arrondir le résultat d'un calcul : 
+                            <strong>
+                                <code>
+                                    SELECT ROUND(AVG(salaire)) FROM employes;
+                                </code>
+                            </strong>
+                          </li>
+                          <li class="alert alert-danger">
+                            On peut cumuler deux notion comme dans l'exmple précédent avce ROUND
+                          </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-12 mt-5">
+                        <h6 class="text-center">Compter avec <em>COUNT()</em></h6>
+                        <ul>
+                          <li>
+                            Grace à <em>COUNT()</em> on peut compter les ligne dans notre table  : 
+                            <strong>
+                                <code>
+                                    SELECT COUNT(*) AS nbr_ligne FROM employes;
+                                </code>
+                            </strong>
+                          </li>
+                          <li>Compter et afficher le nombre d'employés de sexe féminin dans la table 
+                            <strong>
+                                <code>
+                                    SELECT COUNT(*) AS nbr_ligne FROM employes WHERE sexe = 'f';
+                                </code>
+                            </strong>
+                          </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-12 mt-5">
+                        <h6 class="text-center"> Isoler une valeur minimun et maximun <em>MIN()/ MAX()</em></h6>
+                        <ul>
+                          <li>
+                            Grace à <em>MIN()</em> on peut trouver le salaire minimun : 
+                            <strong>
+                                <code>
+                                    SELECT MIN(salaire)  FROM employes;
+                                </code>
+                            </strong>
+                          </li>
+                          <li> Grace à <em>MAX()</em> on peut trouver le salaire maximun :
+                            <strong>
+                                <code>
+                                    SELECT MAX(salaire) FROM employes;
+                                </code>
+                            </strong>
+                          </li>
+                        </ul>
+                </div>
+                    
+         </div>
+
+         <div class="col-sm-12">
+            <h2 class="text-center">10 - Les regroupement avec GROUP BY</h2>
+            <hr>
+        </div>
+        <div class="col-sm-12 mt-5 ">
+            <ul>
+              <li>
+                Ici on veut connaitre le nombre d'employés par service
+                <strong>
+                    <code>
+                        SELECT service, COUNT(*) AS nbrEmploye FROM employes GROUP BY service;
+                    </code>
+                </strong>
+              </li>
+            </ul>
+        </div>
+
+        <div class="row border border-dark p-5">
+            <div class="col-sm-12">
+                <h2 class="text-center">11 - Le mot clef HAVING</h2>
+                <hr>
+            </div>
+            <div class="col-sm-12 mt-5  ">
+                <ul>
+                   <li>
+                    Sélectionner et afficher seulement les service qui ont plus de deux employés
+                    <strong>
+                        <code>
+                            SELECT service, COUNT(*) As nbr_Employe FROM employes GROUP BY service HAVING COUNT(*) > 2;
+                        </code>
+                    </strong>
+                   </li>
+                </ul>
+            </div>
+
+            <div class="row border border-dark p-5">
+                <div class="col-sm-12">
+                    <h2 class="text-center">12 - Requete de modification</h2>
+                    <hr>
+                </div>
+                <div class="col-sm-12 mt-5">
+                    <h6 class="text-center">Mise à jour avec UPDATE</h6>
+                    <ul>
+                       <li>
+                        Augmenter le salaire d'un employé
+                        <strong>
+                            <code>
+                                UPDATE employes SET salaire = 2700 WHERE id_employe = 300
+                            </code>
+                        </strong>
+                       </li>
+                       <li class="alert alert-danger">
+                            On utilise toujours des id pour mettre à jour les information de la base de donnée car c'est le seul élément unique 
+                       </li>
+                       <li>Pour faire plusieurs mises à jour en meme temps il faudra séparer les données par une virgule : 
+                            <strong>
+                                <code>UPDATE employe SET service = 'direction', salaire = 4000 WHERE id_employe = 380</code>
+                            </strong>
+                       </li>
+                    </ul>
+                </div>
+
+                <div class="col-sm-12 mt-5">
+                    <h6 class="text-center">Supprimer avec DELETE</h6>
+                    <ul>
+                        <li>
+                            Supprimer l'enregistrement d'un employé avec DELETE
+                            <strong>
+                                <code>
+                                    DELETE from emplyes WHERE id_employe = 910
+                                </code>
+                            </strong>
+                        </li>
+                        <li>
+                            Supprimer plusieurs enregistrement avec le code suivant (on supprime toutes les personnes du service controle)
+                            <strong>
+                                <code>
+                                    DELETE from emplyes WHERE service = 'controle';
+                                </code>
+                            </strong>
+                        </li>
+                    </ul>
+            </div>
+
+            <div class="row m-2 border border-dark  p-2">
+                <hr>
+               <h2 class="text-center">13 - Requete imbriquer</h2>
+               <hr>
+           
+           </div>
+           <div class="col-sm-12 mt-5">
+                <ul>
+                     <li>
+                          Consiste à éxécuter une requete à l'intérieur d'une autre requete, iencapsulée dans une autre requete, il n'y à pas limite dans le nombre de niveaux d'inbrication
+                     </li>
+                     <li>
+                          Le résultat de chaque requete inbriquée sert de valeur de référence dans la condition de sélection de la requete de niveau supérieur, appelée requete principale
+                     </li>
+                     <li>
+                          Afin d'avoir un cas concret et contexte favorable à ce type de requete, nous allons mobiliser la base de donnée d'une bibkithéque
+                     </li>
+                </ul>
+               <h4 class="text-center">1 - Une BDD bibliothéque</h4>
+                <p>Les sujets d'une BDD bibliotheque</p>
+                <ul>
+                    <li>Une table des <strong>livres</strong></li>
+                    <li>Une table des <strong>abonnés</strong></li>
+                    <li>Une table <strong> emprunt</strong> qui permet de savoir quel livre a été emprunté par quel abonné et à quel date</li>
+                </ul>
+                <p class="alert alert-danger">Ici, on commence à modéliser notre base de donnée en réflichissant à ce qui va aller dedans</p>
+           </div>
+           <div class="col-sm-12 row">
+                <div class="col-sm-12 col-md-4">
+                    <img src="assets/img/abonne.png" alt="Image représentant la liste abonnes" class="img-fluid">
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <img src="assets/img/livre.png" alt="Image représentant la table de livres" class="img-fluid">
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <img src="assets/img/emprunt.png" alt="image représentant la table emprunt" class="img-fluid">
+                </div>
+                <div class="col-sm-12">
+                    <ul>
+                        <li>
+                            <h6>Création de la BDD</h6>
+                            <strong>
+                                <code>
+                                    -> CREATE DATABASE IF NOT EXISTS bibliotheque
+                                </code>
+                            </strong>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <ul>
+                        <li>
+                            <h6>Création de la première table abonnes</h6>
+                            <strong>
+                                <code>
+                                    -> CREATE TABLE IF NOT EXISTS abonnes ( 
+                                        id_abonne INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, prenom VARCHAR(20) NOT NULL
+                                    )
+                                </code>
+                            </strong>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <ul>
+                        <li>
+                            <h6>Création de la deuxième table livres </h6>
+                            <strong>
+                                <code>
+                                    -> CREATE TABLE IF NOT EXISTS livres ( 
+                                        id_livre INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, auteur VARCHAR(30) NOT NULL,
+                                        auteur VARCHAR(30) NOT NULL
+                                        titre VARCHAR(30) NOT NULL
+
+                                    );
+                                </code>
+                            </strong>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <ul>
+                        <li>
+                            <h6>Création de la troisième table emprunt </h6>
+                            <strong>
+                                <code>
+                                    -> CREATE TABLE IF NOT EXISTS emprunt ( 
+                                        id_emprunt INT(3) NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+                                        date_sortie DATE NULL,
+                                        date_rendu DATE NULL,
+                                        id_livre INT(3) NULL,
+                                        id_abonne INT(3) NULL
+                                    ) ;
+                                </code>
+                            </strong>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <ul>
+                        <li>
+                            <h6>Création des clefs étrangères </h6>
+                            <ul>
+                                <li>
+                                    Dans la table emprunt, id_livre sera un champ clés etrangère en référence au champ id_livre de la table livres <br>
+                                    <strong>
+                                        <code> 
+                                            -> ALTER TABLE emprunt ADD FOREIGN KEY (id_livre) REFERENCES bibliotheque.livres(id_livre)
+                                        </code>
+                                    </strong>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-12 mt-5">
+                    <h6 class="text-center">Insérer des données dans les tables</h6>
+                </div>
+                <div class="col-sm-12 col-md-12 mt-4">
+                    <ul>
+                        <li>
+                            <strong>
+                                <code>
+                                    INSERT INTO abonnes (prenom) VALUES <br>
+                                    ('Guillaume'), <br>
+                                    ('Benoit'), <br>
+                                    ('Patrick'), <br>
+                                    ('Jalloul'), <br>
+                                    ('Jamila');
+                                </code>
+                            </strong>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-12 mt-4">
+                    <ul>
+                        <li>
+                            <strong>
+                                <code>
+                                ->INSERT INTO livres (id_livre, auteur, titre) VALUES <br>
+                                (100, 'GUY DE MAUPASSANT', 'Une vie'), <br>
+                                (101, 'GUY DE MAUPASSANT', 'Bel-Ami '), <br>
+                                (102, 'HONORE DE BALZAC', 'Le père Goriot'), <br>
+                                (103, 'ALPHONSE DAUDET', 'Le Petit chose'), <br>
+                                (104, 'ALEXANDRE DUMAS', 'La Reine Margot'), <br>
+                                (105, 'ALEXANDRE DUMAS', 'Les Trois Mousquetaires');
+                                </code>
+                            </strong>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-12 mt-4">
+                    <ul>
+                        <li>
+                            <strong>
+                                <code>
+                                    NSERT INTO emprunt (id_emprunt, id_livre, id_abonne, date_sortie, date_rendu) VALUES <br>
+                                    (NULL, 100, 1, '2014-12-17', '2014-12-18'), <br>
+                                    (NULL, 101, 2, '2014-12-18', '2014-12-20'), <br>
+                                    (NULL, 100, 3, '2014-12-19', '2014-12-22'), <br>
+                                    (NULL, 103, 4, '2014-12-19', '2014-12-22'), <br>
+                                    (NULL, 104, 1, '2014-12-19', '2014-12-28'), <br>
+                                    (NULL, 105, 2, '2015-03-20', '2015-03-26'), <br>
+                                    (NULL, 105, 3, '2015-06-13', NULL), <br>
+                                    (NULL, 100, 2, '2015-06-15', NULL);</code>
+                                </code>
+                            </strong>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-12 mt-5">
+                    <h6>Exemple de requetes</h6>
+                    <ul>
+                        <li>
+                            On cherche les livres qui n'ont pas encore été rendu : <br>
+                            <strong>
+                                <code>
+                                    -> SELECT id_livre FROM emprunt WHERE date_rendu IS NULL; <!--100 et 105-->
+                                </code>
+                            </strong>
+                        </li>
+                        <li class="alert alert-danger">
+                            Pour trouver un résultat est null on utilise le terme <em>IS</em> 
+                            <code>
+                            SELECT id_livre FROM emprunt WHERE date_rendu = NUL
+                            </code> ne retourne aucun résultat
+                        </li>
+                        <li>
+                            On cherche les titres des livres qui n'ont pas était rendu : <br>
+                            <strong>
+                                <code>
+                                    -> SELECT titre FROM livres WHERE id_livre IN (SELECT id_livre FROM emprunt WHERE date_rendu IS NULL);
+                                </code>
+                            </strong>
+                        </li>
+                        <li>
+                            On cherche maintenant les id des livres que Patrick à emprunté : <br>
+                            si je connais l'id de Patrick je peux exécuter :
+                            <strong>
+                                <code>
+                                    -> SELECT id_livre FROM emprunt WHERE id_abonne = 3;
+                                </code>
+                            </strong>
+                            <br>
+                            Si je ne connais pas l'id de Patrick
+                            <strong>
+                                <code>
+                                    -> SELECT id_livre FROM emprunt WHERE id_abonne IN ( SELECT id_abonne FROM abonnes WHERE prenom = 'Patrick' );
+                                </code>
+                            </strong>
+                        </li>
+                        <li>
+                            On cherche maintenant les titre que patricj à emprunté
+                            <strong>
+                                <code>
+                                    SELECT titre, id_livre FROM livres WHERE id_livre IN (SELECT id_livre FROM emprunt WHERE id_abonne IN ( SELECT id_abonne FROM abonnes WHERE prenom = 'Patrick' ));
+                                </code>
+                            </strong>
+                        </li>
+                        <li>
+                            On cherche maintenant le prénom des abonnées ayant emprunté un livre le 2014-12-19 <br>
+                            <strong>
+                                <code>
+                                   -> SELECT prenom, id_abonne FROM abonnes WHERE id_abonne IN (SELECT id_abonne from emprunt WHERE    date_sortie = '2014-12-19');
+                                </code>
+                            </strong>
+                        </li>
+                        <li>
+                            Afficher les des abonnés ayant emprunté un livre de Daudet <br>
+                            <strong>
+                                <code>
+                                   -> SELECT prenom, id_abonne FROM abonnes WHERE id_abonne IN (SELECT id_abonne FROM emprunt WHERE id_livre IN (SELECT id_livre FROM livre WHERE auteur LIKE %daudet%));
+                               </code>
+                            </strong>
+                        </li>
+                        <li>
+                            Afficher les titres de livre que Benoit à emprunté à la bibiorhéque <br>
+                            <strong>
+                                <code>
+                                   -> SELECT titre FROM livres WHERE id_livre IN (SELECT id_livre FROM emprunt WHERE id_abonne IN (SELECT id_abonne FROM abonnes WHERE prenom = 'Benoit'));
+                                </code>
+                            </strong>
+                        </li>
+                        <li>
+                            Afficher les titres des livres que Benoit n'a pas emprunté <br>
+                            <strong>
+                                <code>
+                                   -> SELECT titre FROM livres WHERE id_livre NOT IN (SELECT id_livre FROM emprunt WHERE id_abonne IN (SELECT id_abonne FROM abonnes WHERE prenom = 'benoit'));
+                                   
+                                </code>
+                            </strong>
+                        </li>
+                        <li>
+                            Afficher les titres des livres que Benoit n'a pas encore rendu à la bibliothèque <br>
+                            <strong>
+                                <code>
+                                     -> SELECT titre FROM livres WHERE id_livre IN (SELECT id_livre FROM emprunt WHERE date_rendu IS NULL AND id_abonne IN (SELECT id_abonne WHERE prenom = 'Benoit'));
+                                </code>
+                            </strong>
+                        </li>
+                        <li>
+                            Combien de livres Guillaume a emprunté à la bibliothèque ? <br>
+                            <strong>
+                                <code>
+                                   -> SELECT COUNT(titre), FROM livre WHERE id_livre IN (SELECT id_levre FROM emprunt WHERE  id_abonne IN (SELECT id_abonne FROM abonnes WHERE prenom = 'Guillaume'));
+                                </code>
+                                <br>
+                                  -> SELECT COUNT(id_livre) AS nombreEmpruntGuillaume FROM emprunt WHERE id_abonne IN (SELECT id_abonne FROM abonnes WHERE prenom = 'Guillaume');
+                            </strong>
+                        </li>
+                        <li>
+                            Quel est le livre qui n'a été emprunté par personne <br>
+                            <strong>
+                                <code>
+                                   -> SELECT titre FROM livre WHERE id_livre NOT IN (SELECT id_livre FROM emprunt);
+                                </code>
+                            </strong>
+                        </li>
+                        <li>
+                            Combien de personnes ont emprunté le livre Une vie ? <br>
+                            <strong>
+                                <code>
+                                   -> SELECT COUNT(prenom) FROM abonnes WHERE id_abonne IN  ( SELECT id_abonne FROM emprunt WHERE id_livre IN (SELECT id_livre FROM livres WHERE titre = 'Une vie'))
+                                </code>
+                                <br>
+                                ou 
+                                <br>
+                                <code>
+                                    -> SELECT COUNT(*) FROM emprunt WHERE id_livre IN  (SELECT id_livre FROM livres WHERE titre = 'Une vie')
+                                </code>
+                            </strong>
+                        </li>
+                        <li>
+                            Quel livre a été emprunté le dernier ? <br>
+                            <strong>
+                                <code>
+                                   -> SELECT titre FROM livres WHERE id_livre IN (SELECT id_livre FROM emprunt ORDER BY date _sortie DESC) LIMIT 1
+                                </code>
+                            </strong>
+                        </li>
+                    </ul>
+                </div>
+           </div>
+           <div class="row m-2 border-boder-dark p-2">
+            <div class="col-sm-12">
+                <h2 class="text-center">14 - Les jointure</h2>
+                <hr>
+            </div>
+            <div class="col-sm-12 mt-5">
+                <ul>
+                    <li>Les requetes de jointure permettent l'extraction des données de plusieurs tables</li>
+                    <li>L'avantage des jointures est que l'ont peut obtenir dans le résultat final des colonnes (des champs) issues de plusieurs tables différentes</li>
+                </ul>
+                <h6>Récapitulatif</h6>
+                <ul>
+                    <li><code>SELECT</code> : va comporter la liste des champs que je souhaite afficher dans mon résultat</li>
+                    <li><code>FROM</code> : je précise de quelles tables je me sers dans ma requete</li>
+                    <li><code>WHERE</code> : va permettre de définir la condition de jointure pour assurer le croisement des données</li>
+                    <li><code>AND / OR</code> : autre condition nécessaire à mon résultat</li>
+                </ul>
+            </div>
+            <div class="col-sm-12 mt-5">
+                <ul>
+                    <li>
+                    Dans la bibliothéque, afficher les dates aux quelles Guillaume s'est rendu à la bibliothéque pour emprunter ou rendre un livre, on a besoin de trois colonnes : le prénom, la date_sortie et la date_rendu <br>
+                    <strong>
+                        <code>
+                            SELECT abonnes.prenom, emprunt.date_sortie, emprunt.date_rendu FROM abonnes, emprunt WHERE abonne.prenom = 'Guillaume' AND abonnes.id_abonne = emprunt.id_abonne
+                        </code>
+                    </strong>
+                    </li>
+                    <li>
+                        La meme chose avec des préfixes : <br>
+                        <strong>
+                            <code>
+                                SELECT a.prenom, e.date_sortie, e.date_rendu FROM abonnes a, emprunt e WHERE a.prenom = 'Guillaume' AND a.id_abonne = e.id_abonne
+                            </code>
+                        </strong>
+                    </li>
+                    <li>
+                        Qui a emprunté le livre une vie en 2014, afficher le prenom, date_sortie et le titre du livre <br>
+                        <strong>
+                            <code>
+                                SELECT abonnes.prenom, emprunt.date_sortie, livres.titre FROM abonnes, emprunt, livres WHERE livres.titre = 'Une vie' AND emprunt.date_sortie LIKE '2014%' AND abonnes.id_abonne = emprunt.id_abonne AND livres.id_livre = emprunt.id_livre
+                            </code>
+                        </strong>
+                    </li>
+                    <li>
+                        Afficher le nombre de livres emprunt par chaque abonné : le prenom et le nombre de livres <br>
+                        <strong>
+                            <code>
+                                SELECT abonnes.prenom, COUNT(emprunt.id_livre) AS nbr_livre FROM abonnes, emprunt WHERE abonnes.id_abonne = emprunt.id_abonne GROUP BY emprunt.id_abonne
+                            </code>
+                        </strong>
+                    </li>
+                    <li>
+                        Qui a emprunté quoi et quand ?? <br>
+                        <strong>
+                            <code>
+                                SELECT abonnes.prenom, emprunt.date_sortie, livre.titre FROM abonnes, emprunt, livres WHERE abonnes.id_abonne = emprunt.id_abonne AND livres.id_livre = emprunt.id_livre
+                            </code>
+                        </strong>
+                    </li>
+                    <li>
+                        Afficher le prenom des abonnés avec l'id des livres empruntés : <br>
+                        <strong>
+                            <code>
+                                SELECT abonnes.prenom, emprunt.id_livre FROM abonnes, emprunt WHERE abonnes.idabonne = emprunt.id_abonne
+                            </code>
+                        </strong>
+                    </li>
+                </ul>
+            </div>
+           </div>
+
+        </main>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+SELECT * FROM `employes` WHERE service = 'commercial';
+SELECT * FROM `employes` WHERE service != 'direction';
+SELECT * FROM `employes` WHERE id_employe > '500';
+SELECT * FROM `employes` WHERE salaire >= 3200;
